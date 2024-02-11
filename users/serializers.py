@@ -50,3 +50,18 @@ class UpdateUserAvatarSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('pk', 'avatar')
+
+
+class UpdateUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('pk',  'username', 'email', 'password')
+
+    def update(self, instance, validated_data):
+        print(validated_data)
+        instance.username = validated_data['username']
+        instance.email = validated_data['email']
+        instance.set_password(validated_data['password'])
+        instance.save()
+
+        return instance

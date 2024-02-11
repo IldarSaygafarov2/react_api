@@ -1,11 +1,8 @@
-from django.shortcuts import render
+from rest_framework import filters
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+
 from .models import Product
 from .serializers import ProductSerializer
-from rest_framework import filters
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.response import Response
-
-from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 
 class ProductList(ListAPIView):
@@ -14,7 +11,6 @@ class ProductList(ListAPIView):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title']
     ordering_fields = ['title', 'price', 'rating']
-
 
 
 class ProductDetail(RetrieveAPIView):

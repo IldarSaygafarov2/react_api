@@ -3,7 +3,12 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
-from .serializers import MyTokenObtainPairSerializer, RegisterSerializer, UpdateUserAvatarSerializer
+from .serializers import (
+    MyTokenObtainPairSerializer,
+    RegisterSerializer,
+    UpdateUserAvatarSerializer,
+    UpdateUserSerializer,
+)
 
 
 class MyObtainTokenPairView(TokenObtainPairView):
@@ -20,3 +25,8 @@ class RegisterView(generics.CreateAPIView):
 class UserAvatarUpdateView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UpdateUserAvatarSerializer
+
+
+class UserUpdateView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UpdateUserSerializer
