@@ -1,3 +1,5 @@
+from typing import Dict, Any
+
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
@@ -8,10 +10,19 @@ from .models import User
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
+    def validate(self, attrs: Dict[str, Any]) -> Dict[str, str]:
+        data = super().validate(attrs)
+        user = User.objects.get(username=attrs['username'])
+
+        data.update(**dict(attrs))
+        data['avatar'] = user.avatar.url if user.avatar else ''
+        return data
+
     @classmethod
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
         token['username'] = user.username
+        print(token['username'])
         return token
 
 
