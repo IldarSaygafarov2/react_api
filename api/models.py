@@ -1,22 +1,15 @@
 from django.db import models
-
+from django.core.validators import MaxValueValidator
 from django.urls import reverse
 
 
 class Product(models.Model):
-    RATING_CHOICES = [
-        (1, 1),
-        (2, 2),
-        (3, 3),
-        (4, 4),
-        (5, 5),
-    ]
-
     title = models.CharField(verbose_name='Название', max_length=255)
     description = models.TextField(verbose_name='Описание')
-    image = models.ImageField(verbose_name='Фото', upload_to='products/images/')
-    rating = models.IntegerField(verbose_name='Рейтинг', choices=RATING_CHOICES, default=0)
+    image = models.URLField(verbose_name='Фото', null=True)
+    rating = models.FloatField(verbose_name='Рейтинг', default=0, validators=[MaxValueValidator(5)])
     price = models.DecimalField(verbose_name='Цена', max_digits=6, decimal_places=2)
+    quantity = models.IntegerField(verbose_name='Кол-во', null=True)
 
     def __str__(self):
         return self.title
@@ -24,4 +17,3 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
-
