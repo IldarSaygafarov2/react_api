@@ -6,6 +6,7 @@ from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from .models import User
+from django.contrib.auth import authenticate, login
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -22,7 +23,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
         token['username'] = user.username
-        print(token['username'])
+
         return token
 
 
@@ -76,3 +77,9 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'avatar']
