@@ -30,7 +30,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True,
-        validators=[UniqueValidator(queryset=User.objects.all())]
+        validators=[UniqueValidator(queryset=User.objects.all())],
+        error_messages={
+            'unique': 'Email must be unique'
+        }
     )
 
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
