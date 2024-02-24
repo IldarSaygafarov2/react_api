@@ -30,10 +30,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True,
-        validators=[UniqueValidator(queryset=User.objects.all())],
-        error_messages={
-            'unique': 'Email must be unique'
-        }
+        validators=[UniqueValidator(
+            queryset=User.objects.all(),
+            message='Email must be unique'
+        )
+        ],
     )
 
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
@@ -42,6 +43,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('pk', 'username', 'password', 'password2', 'email')
+        # extra_field
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
@@ -70,7 +72,7 @@ class UpdateUserAvatarSerializer(serializers.ModelSerializer):
 class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('pk',  'username', 'email', 'password')
+        fields = ('pk', 'username', 'email', 'password')
 
     def update(self, instance, validated_data):
         print(validated_data)
