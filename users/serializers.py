@@ -10,15 +10,6 @@ from django.contrib.auth import authenticate, login
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-
-    def validate(self, attrs: Dict[str, Any]) -> Dict[str, str]:
-        data = super().validate(attrs)
-        user = User.objects.get(username=attrs['username'])
-
-        data.update(**dict(attrs))
-        data['avatar'] = user.avatar.url if user.avatar else ''
-        return data
-
     @classmethod
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
@@ -75,7 +66,6 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         fields = ('pk', 'username', 'email', 'password')
 
     def update(self, instance, validated_data):
-        print(validated_data)
         instance.username = validated_data['username']
         instance.email = validated_data['email']
         instance.set_password(validated_data['password'])
