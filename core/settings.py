@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-5f0@t@b17pgop*v^4169ac23^jdio)^^1mewe!d#0kc0vl41gy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["reactapi.pythonanywhere.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["reactapi.pythonanywhere.com", "127.0.0.1", '45.138.158.114']
 
 
 # Application definition
