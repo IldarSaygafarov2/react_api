@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     "45.138.158.114",
     "reactapitest.pythonanywhere.com",
     "prowebapi.tech",
+    "193.168.46.167",
 ]
 
 
