@@ -181,4 +181,4 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
 
-CSRF_TRUSTED_ORIGINS = ["http://prowebapi.tech/", "https://prowebapi.tech/"]
+CSRF_TRUSTED_ORIGINS = ["https://prowebapi.tech", "https://www.prowebapi.tech"]
