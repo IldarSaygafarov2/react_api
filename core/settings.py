@@ -27,12 +27,9 @@ SECRET_KEY = "django-insecure-5f0@t@b17pgop*v^4169ac23^jdio)^^1mewe!d#0kc0vl41gy
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "reactapi.pythonanywhere.com",
     "127.0.0.1",
-    "45.138.158.114",
-    "reactapitest.pythonanywhere.com",
     "prowebapi.tech",
-    "193.168.46.167",
+    "www.prowebapi.tech",
 ]
 
 
