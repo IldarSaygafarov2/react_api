@@ -29,8 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "reactapi.pythonanywhere.com",
     "127.0.0.1",
-    '45.138.158.114',
-    'reactapitest.pythonanywhere.com'
+    "45.138.158.114",
+    "reactapitest.pythonanywhere.com",
+    "prowebapi.tech",
 ]
 
 
@@ -181,3 +182,5 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
+
+CSRF_TRUSTED_ORIGINS = ["http://prowebapi.tech/", "https://prowebapi.tech/"]
