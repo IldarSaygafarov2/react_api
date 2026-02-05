@@ -10,8 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from datetime import timedelta
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,16 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-5f0@t@b17pgop*v^4169ac23^jdio)^^1mewe!d#0kc0vl41gy"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.getenv('DEBUG'))
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "prowebapi.tech",
-    "www.prowebapi.tech",
-]
+ALLOWED_HOSTS = [host for host in os.getenv('ALLOWED_HOSTS').split(',') if host]
 
 
 # Application definition
@@ -181,4 +182,4 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
 
-CSRF_TRUSTED_ORIGINS = ["https://prowebapi.tech", "https://www.prowebapi.tech"]
+CSRF_TRUSTED_ORIGINS = [host for host in os.getenv('CSRF_TRUSTED_ORIGINS').split(',') if host]
